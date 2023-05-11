@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var recipeFetcher = HomeViewModel()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        if recipeFetcher.isLoading{
+            Text("Cargando")
+        } else if recipeFetcher.errorMessage != nil {
+            Text("Error")
+        } else{
+            Text("se pudo")
         }
-        .padding()
     }
 }
 
