@@ -6,3 +6,14 @@
 //
 
 import Foundation
+struct APIMockService: APIServiceProtocol {
+    
+    
+    var result: Result<[Recipe], APIError>
+    
+    func fetchRecipes(url: URL?, completion: @escaping (Result<[Recipe], APIError>) -> Void) {
+        completion(result)
+    }
+    
+    
+}

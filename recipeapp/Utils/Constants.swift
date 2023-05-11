@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+
+struct Constants{
+    
+    static let mainUrl = "http://demo8991720.mockable.io/recipes"
+}

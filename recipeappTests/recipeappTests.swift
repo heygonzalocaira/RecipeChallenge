@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 @testable import recipeapp
 
 final class recipeappTests: XCTestCase {
@@ -18,19 +19,50 @@ final class recipeappTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    override func tearDown() {
+            subscriptions = []
         }
-    }
-
+        
+        var subscriptions = Set<AnyCancellable>()
+        
+        func test_getting_breeds_success() {
+            let result = Result<[Recipe], APIError>.success([Recipe.example1()])
+            
+            let fetcher = HomeViewModel(service: APIMockService(result: result))
+            
+            let promise = expectation(description: "getting breeds")
+            
+            fetcher.$recipes.sink { breeds in
+                if breeds.count > 0 {
+                    promise.fulfill()
+                }
+            }.store(in: &subscriptions)
+            
+           
+            wait(for: [promise], timeout: 2)
+        }
+        
+        
+        func test_loading_error() {
+           
+             let result = Result<[Recipe], APIError>.failure(APIError.badURL)
+             let fetcher = HomeViewModel(service: APIMockService(result: result))
+             
+            let promise = expectation(description: "show error message")
+            fetcher.$recipes.sink { breeds in
+                if !breeds.isEmpty {
+                    XCTFail()
+                }
+            }.store(in: &subscriptions)
+            
+            
+            fetcher.$errorMessage.sink { message in
+                if message != nil {
+                    promise.fulfill()
+                }
+            }.store(in: &subscriptions)
+            
+            wait(for: [promise], timeout: 2)
+            
+        }
 }

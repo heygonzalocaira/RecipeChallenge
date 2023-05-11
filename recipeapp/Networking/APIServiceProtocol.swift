@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+
+protocol APIServiceProtocol {
+    func fetchRecipes(url: URL?, completion: @escaping(Result<[Recipe], APIError>) -> Void)
+}

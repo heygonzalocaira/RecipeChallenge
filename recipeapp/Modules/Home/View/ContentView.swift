@@ -11,11 +11,11 @@ struct ContentView: View {
     @StateObject var recipeFetcher = HomeViewModel()
     var body: some View {
         if recipeFetcher.isLoading{
-            Text("Cargando")
+            LoadingView()
         } else if recipeFetcher.errorMessage != nil {
-            Text("Error")
+            ErrorView(homeFetcher:  recipeFetcher)
         } else{
-            Text("se pudo")
+            RecipeListView(recipes: recipeFetcher.recipes)
         }
     }
 }
