@@ -1,12 +1,13 @@
-## Mobile iOS Engineer 
 
 
-## Recipe App
+## Recipes App
 
 The Recipe app is a project developed in MVVM architecture with three main modules: Home, Details and LocationMap. The key features of each module are described below:
 
-<img src="https://github.com/heygonzalocaira/RecipeChallenge/assets/21184592/651f797c-f9a5-411e-b2aa-7aca8e90ad2d"  width="300" height="500" />
+<img src="https://github.com/heygonzalocaira/RecipeChallenge/blob/main/assets/recipes_cover_page.png?raw=true" height="400" /> 
 
+
+<img src="https://github.com/heygonzalocaira/RecipeChallenge/assets/21184592/651f797c-f9a5-411e-b2aa-7aca8e90ad2d"  width="300" height="500" />
 <img src="https://github.com/heygonzalocaira/RecipeChallenge/assets/21184592/3b495a7f-d9c4-4ad0-8473-671b3817733f"  width="300" height="500" />
 <img src="https://github.com/heygonzalocaira/RecipeChallenge/assets/21184592/dfc50f0d-ec3d-4b7f-aed5-5275d6a73526"  width="300" height="500" />
 
